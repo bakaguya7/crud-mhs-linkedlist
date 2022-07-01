@@ -24,12 +24,13 @@ bool full();
 void clear();
 void buat();
 void tampil();
-void sorting();
+void urutkan();
+void cari();
 
 int main(){
     do {
         cout << "[MAIN MENU]" << endl;
-        cout << "1. BUAT \t 2. TAMPIL \t 3. SORTING" << endl; 
+        cout << "1. BUAT \t 2. TAMPIL \t 3. URUTKAN \t 4. CARI" << endl; 
         cout << "MASUKKAN NOMOR MENU : "; cin >> nm;
         switch(nm){
             case 1 :
@@ -39,11 +40,13 @@ int main(){
                 clear(); tampil();
             break;
             case 3 :
-                clear(); sorting();
+                clear(); urutkan();
+            break;
+            case 4 :
+                clear(); cari();
             break;
         }
     } while(q != '5');
-    
 }
 
 void clear(void){
@@ -93,19 +96,17 @@ void tampil(){
                 current = current->next;
             }
             cout << "KEMBALI KE MAIN MENU : [y/n] "; cin >> q;
-        } while(q != 'n');
+        } while(q != 'y');
     }
 }
 
-void sorting(){
+void urutkan(){
     cout << "[MAIN MENU/SORTING]" << endl;
     if(head == NULL){
         cout << "DATA KOSONG!" << endl;
     } else {
         do {
             Mahasiswa *current = head, *indeks = NULL;
-            // char t_nim[15], t_nama[15];
-            // float t_ipsd, t_ipso, t_iphs, t_ipk;
             while(current != NULL){
                 indeks = current->next;
                 while(indeks != NULL){
@@ -124,6 +125,35 @@ void sorting(){
 
             cout << "SORTING BERHASIL!" << endl;
             cout << "KEMBALI KE MAIN MENU? [y/n] "; cin >> q;
-        } while(q != 'n');
+        } while(q != 'y');
+    }
+}
+
+void cari(){
+    if(head == NULL){
+        cout << "DATA KOSONG!" << endl;
+    } else {
+        do {
+            char t_nama[15]; bool lock;
+            Mahasiswa *current = head;
+            cout << "MASUKKAN NAMA MAHASISWA : "; cin >> t_nama;
+            while(current != head){
+                if(current->nama == t_nama){
+                    lock = true;
+                    break;
+                }
+                current = current->next;
+            }
+            if(lock == true){
+                cout << "=================================================================" << endl;
+                cout << "| NIM \t\t| NAMA \t\t| IP SD | SO \t| HS \t| IPK \t|" << endl;
+                cout << "=================================================================" << endl;
+                cout << "| "<< current->nim << "\t\t| " << current->nama << " \t| "
+                << fixed << setprecision(2) << current->ip_sd << " \t| " << current->ip_so << " \t| "
+                << current->ip_hs << " \t| " << current->ipk << " \t|" << endl;
+                cout << "=================================================================" << endl;
+            }
+            cout << "KEMBALI KE MAIN MENU? [y/n] "; cin >> q;
+        } while(q != 'y');
     }
 }
