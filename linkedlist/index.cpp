@@ -137,7 +137,7 @@ void cari(){
             char t_nama[15]; bool lock;
             Mahasiswa *current = head;
             cout << "MASUKKAN NAMA MAHASISWA : "; cin >> t_nama;
-            while(current != head){
+            while(current != NULL){
                 if(current->nama == t_nama){
                     lock = true;
                     break;
